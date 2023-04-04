@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "346085751179",
+    "project_id": "hers-6725f",
+    "storage_bucket": "hers-6725f.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:346085751179:android:54b2d4a5a6fe826b78d78e",
+        "android_client_info": {
+          "package_name": "com.tslebang.hersapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "346085751179-7one7hiso0u62grdckpipt085n9uik09.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDk4qtyPQmExd82S-FyV2NeOI4XloaIX1g"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "346085751179-7one7hiso0u62grdckpipt085n9uik09.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,0 +1,20 @@
+<resources>
+    <string name="app_name">HERS APP</string>
+    <string name="welcome">Welcome to hers an application for women to support other women</string>
+    <string name="Instruction">To login please enter your credetials below</string>
+    <string name="email">Enter your email address</string>
+    <string name="password">Enter your password</string>
+    <string name="reg">To register enter your details below</string>
+    <string name="register">Register</string>
+    <string name="acc_exists">Already have account? LogIn</string>
+    <string name="logo">logo</string>
+    <string name="phone">Enter your phone number</string>
+    <string name="name">Enter your full name</string>
+    <string name="description">Enter name and quantity of items you are requesting</string>
+    <string name="elogo">hers emergency logo</string>
+    <string name="sosInst">In case of an emergency, enter your emergency contacts number\'s and click the sos button below to send an alert message to your emergency contact with your current location. Make sure your phone\'slocation services are enabled for accurate tracking.</string>
+    <string name="description2">Enter emegency contact/s number</string>
+    <string name="sosBtn">SOS</string>
+    <string name="slogan">Helping.Empowering.Restoring dignity.Saving Women</string>
+
+</resources>

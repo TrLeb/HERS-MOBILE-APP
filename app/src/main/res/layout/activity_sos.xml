@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Sos"
+    android:background="@drawable/sosback">
+
+    <TextView
+        android:id="@+id/sosInst"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/elogo"
+        android:layout_marginTop="2dp"
+        android:text="@string/sosInst"
+        android:textAlignment="center"
+        android:textColor="@color/LavenderBlush"
+        android:textSize="17sp"
+        android:textStyle="italic" />
+
+
+    <EditText
+        android:id="@+id/sosNum"
+        android:layout_width="369dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/sosInst"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="30dp"
+        android:hint=" Enter your emegency contact number here"
+        android:minHeight="48dp"
+        android:textColorHint="@color/DarkGray" />
+
+    <Button
+        android:id="@+id/sosBtn"
+        style="@style/TextAppearance.AppCompat.Widget.Button.Colored"
+        android:layout_width="329dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/sosNum"
+        android:layout_centerHorizontal="true"
+        android:text="@string/sosBtn"
+        android:textColor="#BF360C"
+        android:textSize="100sp"
+        android:layout_marginTop="30dp"
+        android:outlineAmbientShadowColor="@color/AntiqueWhite"/>
+
+
+
+
+
+    <ImageView
+        android:id="@+id/elogo"
+        android:layout_width="195dp"
+        android:layout_height="155dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="59dp"
+        android:layout_marginTop="3dp"
+        android:layout_marginEnd="99dp"
+        android:contentDescription="@string/elogo"
+        app:srcCompat="@drawable/ss" />
+
+</RelativeLayout>
