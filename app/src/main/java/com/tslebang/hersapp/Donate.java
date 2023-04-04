@@ -12,6 +12,8 @@ import android.location.Location;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -48,7 +50,7 @@ public class Donate extends AppCompatActivity implements OnMapReadyCallback, Goo
     SupportMapFragment mapFragment;
     EditText mFullName,mDescription,mPhone;
     Button mSubmitBtn;
-    FirebaseAuth fAuth;
+    FirebaseAuth mAuth;
     FirebaseFirestore fStore;
     String userID;
     public static final String TAG = "TAG";
@@ -62,7 +64,7 @@ public class Donate extends AppCompatActivity implements OnMapReadyCallback, Goo
         mDescription = findViewById(R.id.description);
         mSubmitBtn=findViewById(R.id.submit);
 
-        fAuth=FirebaseAuth.getInstance();
+        mAuth=FirebaseAuth.getInstance();
         fStore= FirebaseFirestore.getInstance();
 
 
@@ -128,7 +130,7 @@ public class Donate extends AppCompatActivity implements OnMapReadyCallback, Goo
                     return;
                 }
 
-                userID = fAuth.getCurrentUser().getUid();
+                userID = mAuth.getCurrentUser().getUid();
                 //DocumentReference documentReference = fStore.collection("donate").document(userID);
                 CollectionReference collectionReference = fStore.collection("user data");
 
@@ -196,5 +198,22 @@ public class Donate extends AppCompatActivity implements OnMapReadyCallback, Goo
                 Toast.makeText(this, "Permission Denied", Toast.LENGTH_SHORT).show();
             }
         }
+    }
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.appmenu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        if (item.getItemId() == R.id.menuLogout){
+
+            mAuth.signOut();
+            finish();
+            startActivity(new Intent(Donate.this, MainActivity.class));
+        } else if (item.getItemId() == R.id.home) {
+            startActivity(new Intent(Donate.this, Dashboard.class));
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

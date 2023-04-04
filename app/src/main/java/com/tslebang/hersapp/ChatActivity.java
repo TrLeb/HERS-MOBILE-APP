@@ -92,6 +92,8 @@ public class ChatActivity extends AppCompatActivity {
             mAuth.signOut();
             finish();
             startActivity(new Intent(ChatActivity.this, MainActivity.class));
+        } else if (item.getItemId() == R.id.home) {
+            startActivity(new Intent(ChatActivity.this, Dashboard.class));
         }
         return super.onOptionsItemSelected(item);
     }

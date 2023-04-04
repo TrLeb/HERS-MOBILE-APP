@@ -9,10 +9,13 @@ import androidx.core.content.ContextCompat;
 
 import android.Manifest;
 
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.os.Bundle;
 import android.telephony.SmsManager;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -24,6 +27,8 @@ import com.google.android.gms.location.LocationCallback;
 import com.google.android.gms.location.LocationResult;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 public class Sos extends AppCompatActivity implements OnMapReadyCallback {
 
@@ -33,6 +38,7 @@ public class Sos extends AppCompatActivity implements OnMapReadyCallback {
     LocationRequest locationRequest;
     LocationCallback locationCallback;
     Button sosBtn;
+    FirebaseAuth mAuth;
     TextView sosNumTv;
     private static final String SOS_MESSAGE = "HELP! I am in danger. Please help me. My current location: ";
 
@@ -50,6 +56,7 @@ public class Sos extends AppCompatActivity implements OnMapReadyCallback {
         locationRequest.setInterval(10000);
         locationRequest.setFastestInterval(5000);
         locationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
+        mAuth=FirebaseAuth.getInstance();
 
         locationCallback = new LocationCallback() {
             @Override
@@ -106,5 +113,22 @@ public class Sos extends AppCompatActivity implements OnMapReadyCallback {
     @Override
     public void onMapReady(@NonNull GoogleMap googleMap) {
 
+    }
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.appmenu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        if (item.getItemId() == R.id.menuLogout){
+
+            mAuth.signOut();
+            finish();
+            startActivity(new Intent(Sos.this, MainActivity.class));
+        } else if (item.getItemId() == R.id.home) {
+            startActivity(new Intent(Sos.this, Dashboard.class));
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

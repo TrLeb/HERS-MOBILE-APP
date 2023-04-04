@@ -12,6 +12,8 @@ import android.location.Location;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -49,7 +51,7 @@ public class Request extends AppCompatActivity implements OnMapReadyCallback, Go
     SupportMapFragment mapFragment;
     EditText mFullName,mDescription;
     Button mSubmitBtn;
-    FirebaseAuth fAuth;
+    FirebaseAuth mAuth;
     FirebaseFirestore fStore;
     String userID;
     public static final String TAG = "TAG";
@@ -63,7 +65,7 @@ public class Request extends AppCompatActivity implements OnMapReadyCallback, Go
         mDescription = findViewById(R.id.description);
         mSubmitBtn=findViewById(R.id.submit);
 
-        fAuth=FirebaseAuth.getInstance();
+        mAuth=FirebaseAuth.getInstance();
         fStore= FirebaseFirestore.getInstance();
 
         mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
@@ -74,6 +76,24 @@ public class Request extends AppCompatActivity implements OnMapReadyCallback, Go
         }
 
 
+    }
+
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.appmenu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        if (item.getItemId() == R.id.menuLogout){
+
+            mAuth.signOut();
+            finish();
+            startActivity(new Intent(Request.this, MainActivity.class));
+        } else if (item.getItemId() == R.id.home) {
+            startActivity(new Intent(Request.this, Dashboard.class));
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     @Override
@@ -100,10 +120,6 @@ public class Request extends AppCompatActivity implements OnMapReadyCallback, Go
         mLastLocation = location;
         LatLng latLng = new LatLng(location.getLatitude(),location.getLongitude());
 
-        //MarkerOptions markerOptions1 = new MarkerOptions().position(latLng).title("You are here");
-        //mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
-        //mMap.animateCamera(CameraUpdateFactory.zoomTo(15));
-        //mMap.addMarker(markerOptions1).showInfoWindow();
 
         MarkerOptions markerOptions = new MarkerOptions().position(latLng).title("You are here");
         mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng,15));
@@ -128,8 +144,7 @@ public class Request extends AppCompatActivity implements OnMapReadyCallback, Go
                 }
 
 
-                userID = fAuth.getCurrentUser().getUid();
-                //DocumentReference documentReference = fStore.collection("receiver").document(userID);
+                userID = mAuth.getCurrentUser().getUid();
                 CollectionReference collectionReference = fStore.collection("user data");
 
                 GeoPoint geoPoint = new GeoPoint(location.getLatitude(),location.getLongitude());
@@ -147,7 +162,7 @@ public class Request extends AppCompatActivity implements OnMapReadyCallback, Go
                             public void onSuccess(DocumentReference documentReference) {
                                 Toast.makeText(getApplicationContext(),"Success!",Toast.LENGTH_SHORT).show();
                                 Log.d(TAG,"Success!");
-                                //startActivity(new Intent(getApplicationContext(),MainActivity.class));
+
                                 Intent intent = new Intent(Request.this, MainActivity.class);
                                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
                                 startActivity(intent);
@@ -168,8 +183,6 @@ public class Request extends AppCompatActivity implements OnMapReadyCallback, Go
     @Override
     public void onConnected(@Nullable Bundle bundle) {
         mLocationRequest = new LocationRequest();
-        //mLocationRequest.setInterval(1000);
-        //mLocationRequest.setFastestInterval(1000);
         mLocationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
         if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             return;
